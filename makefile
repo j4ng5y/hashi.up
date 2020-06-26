@@ -50,8 +50,8 @@ nix_arm:
 .PHONY: build_windows
 build_windows:
 	@CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -a -o dist/win/hashi.up.exe ${SRC}
-	@cd dist/win; zip hashi.up_${VER}_windows_amd64.zip ./hashi.up; cd ../..
+	@cd dist/win; zip hashi.up_${VER}_windows_amd64.zip ./hashi.up.exe; cd ../..
 	@CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -a -o dist/win/hashi.up.exe ${SRC}
-	@cd dist/win; zip hashi.up_${VER}_windows_386.zip ./hashi.up; cd ../..
+	@cd dist/win; zip hashi.up_${VER}_windows_386.zip ./hashi.up.exe; cd ../..
 	@rm -f dist/win/hashi.up.exe
 
