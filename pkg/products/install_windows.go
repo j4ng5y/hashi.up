@@ -11,7 +11,7 @@ import (
 )
 
 func (P *Product) unzip() error {
-	dest := "C:\Program Files\hashicorp"
+	dest := "C:\\Program Files\\hashicorp"
 	r, err := zip.OpenReader(P.downloadedPath)
 	if err != nil {
 		return err
