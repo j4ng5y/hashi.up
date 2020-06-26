@@ -3,7 +3,6 @@ package cmd
 import (
 	"log"
 
-	"github.com/j4ng5y/hashi.up/pkg/tvcnvp"
 	"github.com/spf13/cobra"
 )
 
@@ -14,99 +13,7 @@ func Run() {
 			Use:     "hashi.up",
 			Version: "0.1.0",
 			Args:    cobra.NoArgs,
-			Run: func(ccmd *cobra.Command, args []string) {
-				var TF, VAU, C, N, VAG, P *tvcnvp.Product
-				if terraformVerFlag == "latest" {
-					TF = &tvcnvp.Product{
-						Name:    "terraform",
-						Version: tvcnvp.TerraformLatest,
-					}
-				} else {
-					TF = &tvcnvp.Product{
-						Name:    "terraform",
-						Version: tvcnvp.SemVer(terraformVerFlag),
-					}
-				}
-
-				if packerVerFlag == "latest" {
-					P = &tvcnvp.Product{
-						Name:    "packer",
-						Version: tvcnvp.PackerLatest,
-					}
-				} else {
-					P = &tvcnvp.Product{
-						Name:    "packer",
-						Version: tvcnvp.SemVer(packerVerFlag),
-					}
-				}
-
-				if vagrantVerFlag == "latest" {
-					VAG = &tvcnvp.Product{
-						Name:    "vagrant",
-						Version: tvcnvp.VagrantLatest,
-					}
-				} else {
-					VAG = &tvcnvp.Product{
-						Name:    "vagrant",
-						Version: tvcnvp.SemVer(vagrantVerFlag),
-					}
-				}
-
-				if nomadVerFlag == "latest" {
-					N = &tvcnvp.Product{
-						Name:    "nomad",
-						Version: tvcnvp.NomadLatest,
-					}
-				} else {
-					N = &tvcnvp.Product{
-						Name:    "nomad",
-						Version: tvcnvp.SemVer(nomadVerFlag),
-					}
-				}
-
-				if consulVerFlag == "latest" {
-					C = &tvcnvp.Product{
-						Name:    "consul",
-						Version: tvcnvp.ConsulLatest,
-					}
-				} else {
-					C = &tvcnvp.Product{
-						Name:    "consul",
-						Version: tvcnvp.SemVer(consulVerFlag),
-					}
-				}
-
-				if vaultVerFlag == "latest" {
-					VAU = &tvcnvp.Product{
-						Name:    "vault",
-						Version: tvcnvp.VaultLatest,
-					}
-				} else {
-					VAU = &tvcnvp.Product{
-						Name:    "vault",
-						Version: tvcnvp.SemVer(vaultVerFlag),
-					}
-				}
-
-				if err := TF.Download(); err != nil {
-					log.Fatal(err)
-				}
-				if err := VAU.Download(); err != nil {
-					log.Fatal(err)
-				}
-				if err := C.Download(); err != nil {
-					log.Fatal(err)
-				}
-				if err := N.Download(); err != nil {
-					log.Fatal(err)
-				}
-				if err := VAG.Download(); err != nil {
-					log.Fatal(err)
-				}
-				if err := P.Download(); err != nil {
-					log.Fatal(err)
-				}
-			},
+			Run:     downloadCMD,
 		}
 	)
 
