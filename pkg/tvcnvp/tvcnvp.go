@@ -33,7 +33,7 @@ const (
 type SemVer string
 
 func (S SemVer) Valid() bool {
-	v := regexp.MustCompile("^\\d\\.\\d{1-2}\\.\\d{1-2}$")
+	v := regexp.MustCompile("^[0-9]\\.[0-9]{1,2}\\.[0-9]{1,2}$")
 	return v.MatchString(string(S))
 }
 
