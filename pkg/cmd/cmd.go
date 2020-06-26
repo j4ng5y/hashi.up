@@ -6,25 +6,41 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func runAll(ccmd *cobra.Command, args []string) {
-	downloadCMD(ccmd, args)
-	installCMD(ccmd, args)
+func installCMD(ccmd *cobra.Command, args []string) {
+	v := map[string]string{
+		"terraform-version": "",
+		"vault-version":     "",
+		"consul-version":    "",
+		"nomad-version":     "",
+		"vagrant-version":   "",
+		"packer-version":    "",
+	}
+
+	for key := range v {
+		value, _ := ccmd.LocalFlags().GetString(key)
+		v[key] = value
+	}
+
+	inst, _ := ccmd.LocalFlags().GetBool("install")
+
+	install(inst, v)
 }
+func updateCMD(ccmd *cobra.Command, args []string)    {}
+func uninstallCMD(ccmd *cobra.Command, args []string) {}
 
 func Run() {
 	var (
 		terraformVerFlag, vaultVerFlag, consulVerFlag, nomadVerFlag, vagrantVerFlag, packerVerFlag string
 
+		installFlag bool
+
 		mainCmd = &cobra.Command{
 			Use:     "hashi.up",
-			Version: "0.1.0",
+			Version: "0.2.0",
 			Args:    cobra.NoArgs,
-			Run:     runAll,
-		}
-		downloadCmd = &cobra.Command{
-			Use:  "download",
-			Args: cobra.NoArgs,
-			Run:  downloadCMD,
+			Run: func(ccmd *cobra.Command, args []string) {
+				ccmd.Help()
+			},
 		}
 		installCmd = &cobra.Command{
 			Use:  "install",
@@ -43,14 +59,15 @@ func Run() {
 		}
 	)
 
-	mainCmd.AddCommand(downloadCmd, installCmd, updateCmd, uninstallCmd)
+	mainCmd.AddCommand(installCmd, updateCmd, uninstallCmd)
 
-	mainCmd.Flags().StringVar(&terraformVerFlag, "terraform-version", "latest", "The version of terraform to install")
-	mainCmd.Flags().StringVar(&vaultVerFlag, "vault-version", "latest", "The version of vault to install")
-	mainCmd.Flags().StringVar(&consulVerFlag, "consul-version", "latest", "The version of consul to install")
-	mainCmd.Flags().StringVar(&nomadVerFlag, "nomad-version", "latest", "The version of nomad to install")
-	mainCmd.Flags().StringVar(&vagrantVerFlag, "vagrant-version", "latest", "The version of vagrant to install")
-	mainCmd.Flags().StringVar(&packerVerFlag, "packer-version", "latest", "The version of packer to install")
+	installCmd.Flags().StringVar(&terraformVerFlag, "terraform-version", "latest", "The version of terraform to install")
+	installCmd.Flags().StringVar(&vaultVerFlag, "vault-version", "latest", "The version of vault to install")
+	installCmd.Flags().StringVar(&consulVerFlag, "consul-version", "latest", "The version of consul to install")
+	installCmd.Flags().StringVar(&nomadVerFlag, "nomad-version", "latest", "The version of nomad to install")
+	installCmd.Flags().StringVar(&vagrantVerFlag, "vagrant-version", "latest", "The version of vagrant to install")
+	installCmd.Flags().StringVar(&packerVerFlag, "packer-version", "latest", "The version of packer to install")
+	installCmd.Flags().BoolVar(&installFlag, "install", true, "whether or not to install the tool after downloading it")
 
 	if err := mainCmd.Execute(); err != nil {
 		log.Fatal(err)

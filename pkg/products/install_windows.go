@@ -7,7 +7,6 @@ import (
 	"io"
 	"os"
 	"path/filepath"
-	"sync"
 )
 
 func (P *Product) unzip() error {
@@ -70,4 +69,4 @@ func (P *Product) unzip() error {
 	return nil
 }
 
-func (P *Product) Install(wg *sync.WaitGroup) {}
+func (P *Product) Install() {}

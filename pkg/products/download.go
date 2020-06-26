@@ -12,8 +12,13 @@ import (
 	"sync"
 )
 
-func (T *Product) Download(skip bool, wg *sync.WaitGroup) {
+func (T *Product) Download(skip, install bool, wg *sync.WaitGroup) {
 	defer wg.Done()
+
+	if install {
+		defer T.Install()
+	}
+
 	if skip {
 		return
 	}
