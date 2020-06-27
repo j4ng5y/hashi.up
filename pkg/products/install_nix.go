@@ -271,7 +271,11 @@ export PATH=$PATH:%s/.local/hashicorp
 	return nil
 }
 
-func (P *Product) Install() {
+func (P *Product) Install(tool string) {
+
+}
+
+func (P *Product) InstallAll() {
 	h, err := os.UserHomeDir()
 	if err != nil {
 		log.Println(err)

@@ -12,16 +12,9 @@ import (
 	"sync"
 )
 
-func (T *Product) Download(skip, install bool, wg *sync.WaitGroup) {
+func (T *Product) Download(wg *sync.WaitGroup) {
 	defer wg.Done()
-
-	if install {
-		defer T.Install()
-	}
-
-	if skip {
-		return
-	}
+	defer T.Install(string(T.Name))
 
 	goos := strings.ToLower(runtime.GOOS)
 	goarch := strings.ToLower(runtime.GOARCH)

@@ -91,3 +91,16 @@ type Product struct {
 	downloadURL    string
 	downloadedPath string
 }
+
+func New(name Name, version SemVer) (*Product, error) {
+	if _, err := name.Parse(); err != nil {
+		return nil, err
+	}
+	if !version.Valid() {
+		return nil, fmt.Errorf("%v is not a valid SemVer version", version)
+	}
+	return &Product{
+		Name:    name,
+		Version: version,
+	}, nil
+}

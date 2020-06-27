@@ -1,188 +1,189 @@
 package cmd
 
 import (
+	"log"
+	"strings"
 	"sync"
 
 	"github.com/j4ng5y/hashi.up/pkg/products"
+	"github.com/spf13/cobra"
 )
 
-func install(install bool, versions map[string]string) {
-	wg := &sync.WaitGroup{}
-	var TF, VAU, C, N, VAG, P *products.Product
+func installCMD(ccmd *cobra.Command, args []string) {
+	var Terraform, Nomad, Packer, Consul, Vault, Vagrant *products.Product
+	var err error
+	wg := new(sync.WaitGroup)
 
-	tfv := versions["terraform-version"]
-	vauv := versions["vault-version"]
-	cv := versions["consul-version"]
-	nv := versions["nomad-version"]
-	vagv := versions["vagrant-version"]
-	pv := versions["packer-version"]
+	switch {
+	case argsContains(args, "all"):
+		if len(args) > 1 {
+			log.Println("\"all\" can exist all by itself, no need to do extra work :D")
+		}
 
-	if tfv == "latest" {
-		wg.Add(1)
-		TF = &products.Product{
-			Name:    "terraform",
-			Version: products.TerraformLatest,
-		}
-		if install {
-			go TF.Download(false, true, wg)
+		if tfver, _ := ccmd.Flags().GetString("terraform-version"); strings.ToLower(tfver) == "latest" {
+			Terraform, err = products.New(products.Name("terraform"), products.SemVer(products.TerraformLatest))
+			if err != nil {
+				log.Fatal(err)
+			}
 		} else {
-			go TF.Download(false, false, wg)
+			Terraform, err = products.New(products.Name("terraform"), products.SemVer(tfver))
+			if err != nil {
+				log.Fatal(err)
+			}
 		}
-	} else if tfv == "none" {
-		wg.Add(1)
-		TF = &products.Product{}
-		go TF.Download(true, false, wg)
-	} else {
-		wg.Add(1)
-		TF = &products.Product{
-			Name:    "terraform",
-			Version: products.SemVer(tfv),
-		}
-		if install {
-			go TF.Download(false, true, wg)
+
+		if cver, _ := ccmd.Flags().GetString("consul-version"); strings.ToLower(cver) == "latest" {
+			Consul, err = products.New(products.Name("consul"), products.SemVer(products.ConsulLatest))
+			if err != nil {
+				log.Fatal(err)
+			}
 		} else {
-			go TF.Download(false, false, wg)
+			Consul, err = products.New(products.Name("consul"), products.SemVer(cver))
+			if err != nil {
+				log.Fatal(err)
+			}
 		}
+
+		if nver, _ := ccmd.Flags().GetString("nomad-version"); strings.ToLower(nver) == "latest" {
+			Nomad, err = products.New(products.Name("nomad"), products.SemVer(products.NomadLatest))
+			if err != nil {
+				log.Fatal(err)
+			}
+		} else {
+			Nomad, err = products.New(products.Name("terraform"), products.SemVer(nver))
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
+
+		if vagver, _ := ccmd.Flags().GetString("vagrant-version"); strings.ToLower(vagver) == "latest" {
+			Vagrant, err = products.New(products.Name("vagrant"), products.SemVer(products.VagrantLatest))
+			if err != nil {
+				log.Fatal(err)
+			}
+		} else {
+			Vagrant, err = products.New(products.Name("terraform"), products.SemVer(vagver))
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
+
+		if vauver, _ := ccmd.Flags().GetString("vault-version"); strings.ToLower(vauver) == "latest" {
+			Vault, err = products.New(products.Name("vault"), products.SemVer(products.VaultLatest))
+			if err != nil {
+				log.Fatal(err)
+			}
+		} else {
+			Vault, err = products.New(products.Name("terraform"), products.SemVer(vauver))
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
+
+		if pver, _ := ccmd.Flags().GetString("packer-version"); strings.ToLower(pver) == "latest" {
+			Packer, err = products.New(products.Name("packer"), products.SemVer(products.PackerLatest))
+			if err != nil {
+				log.Fatal(err)
+			}
+		} else {
+			Packer, err = products.New(products.Name("terraform"), products.SemVer(pver))
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
+
+		wg.Add(6)
+		go Terraform.Download(wg)
+		go Nomad.Download(wg)
+		go Consul.Download(wg)
+		go Vault.Download(wg)
+		go Vagrant.Download(wg)
+		go Packer.Download(wg)
+		wg.Wait()
+		return
+	case argsContains(args, "terraform"):
+		if tfver, _ := ccmd.Flags().GetString("terraform-version"); strings.ToLower(tfver) == "latest" {
+			Terraform, err = products.New(products.Name("terraform"), products.SemVer(products.TerraformLatest))
+			if err != nil {
+				log.Fatal(err)
+			}
+		} else {
+			Terraform, err = products.New(products.Name("terraform"), products.SemVer(tfver))
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
+		wg.Add(1)
+		Terraform.Download(wg)
+	case argsContains(args, "nomad"):
+		if nver, _ := ccmd.Flags().GetString("nomad-version"); strings.ToLower(nver) == "latest" {
+			Nomad, err = products.New(products.Name("nomad"), products.SemVer(products.NomadLatest))
+			if err != nil {
+				log.Fatal(err)
+			}
+		} else {
+			Nomad, err = products.New(products.Name("terraform"), products.SemVer(nver))
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
+		wg.Add(1)
+		Nomad.Download(wg)
+	case argsContains(args, "consul"):
+		if cver, _ := ccmd.Flags().GetString("consul-version"); strings.ToLower(cver) == "latest" {
+			Consul, err = products.New(products.Name("consul"), products.SemVer(products.ConsulLatest))
+			if err != nil {
+				log.Fatal(err)
+			}
+		} else {
+			Consul, err = products.New(products.Name("consul"), products.SemVer(cver))
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
+		wg.Add(1)
+		Consul.Download(wg)
+	case argsContains(args, "vagrant"):
+		if vagver, _ := ccmd.Flags().GetString("vagrant-version"); strings.ToLower(vagver) == "latest" {
+			Vagrant, err = products.New(products.Name("vagrant"), products.SemVer(products.VagrantLatest))
+			if err != nil {
+				log.Fatal(err)
+			}
+		} else {
+			Vagrant, err = products.New(products.Name("terraform"), products.SemVer(vagver))
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
+		wg.Add(1)
+		Vagrant.Download(wg)
+	case argsContains(args, "vault"):
+		if vauver, _ := ccmd.Flags().GetString("vault-version"); strings.ToLower(vauver) == "latest" {
+			Vault, err = products.New(products.Name("vault"), products.SemVer(products.VaultLatest))
+			if err != nil {
+				log.Fatal(err)
+			}
+		} else {
+			Vault, err = products.New(products.Name("terraform"), products.SemVer(vauver))
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
+		wg.Add(1)
+		Vault.Download(wg)
+	case argsContains(args, "packer"):
+		if pver, _ := ccmd.Flags().GetString("packer-version"); strings.ToLower(pver) == "latest" {
+			Packer, err = products.New(products.Name("packer"), products.SemVer(products.PackerLatest))
+			if err != nil {
+				log.Fatal(err)
+			}
+		} else {
+			Packer, err = products.New(products.Name("terraform"), products.SemVer(pver))
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
+		wg.Add(1)
+		Packer.Download(wg)
 	}
-
-	if pv == "latest" {
-		wg.Add(1)
-		P = &products.Product{
-			Name:    "packer",
-			Version: products.PackerLatest,
-		}
-		if install {
-			go P.Download(false, true, wg)
-		} else {
-			go P.Download(false, false, wg)
-		}
-	} else if pv == "none" {
-		wg.Add(1)
-		P = &products.Product{}
-		go P.Download(true, false, wg)
-	} else {
-		wg.Add(1)
-		P = &products.Product{
-			Name:    "packer",
-			Version: products.SemVer(pv),
-		}
-		if install {
-			go P.Download(false, true, wg)
-		} else {
-			go P.Download(false, false, wg)
-		}
-	}
-
-	if vagv == "latest" {
-		wg.Add(1)
-		VAG = &products.Product{
-			Name:    "vagrant",
-			Version: products.VagrantLatest,
-		}
-		if install {
-			go VAG.Download(false, true, wg)
-		} else {
-			go VAG.Download(false, false, wg)
-		}
-	} else if vagv == "none" {
-		wg.Add(1)
-		VAG = &products.Product{}
-		go VAG.Download(true, false, wg)
-	} else {
-		wg.Add(1)
-		VAG = &products.Product{
-			Name:    "vagrant",
-			Version: products.SemVer(vagv),
-		}
-		if install {
-			go VAG.Download(false, true, wg)
-		} else {
-			go VAG.Download(false, false, wg)
-		}
-	}
-
-	if nv == "latest" {
-		wg.Add(1)
-		N = &products.Product{
-			Name:    "nomad",
-			Version: products.NomadLatest,
-		}
-		if install {
-			go N.Download(false, true, wg)
-		} else {
-			go N.Download(false, false, wg)
-		}
-	} else if nv == "none" {
-		wg.Add(1)
-		N = &products.Product{}
-		go N.Download(true, false, wg)
-	} else {
-		wg.Add(1)
-		N = &products.Product{
-			Name:    "nomad",
-			Version: products.SemVer(nv),
-		}
-		if install {
-			go N.Download(false, true, wg)
-		} else {
-			go N.Download(false, false, wg)
-		}
-	}
-
-	if cv == "latest" {
-		wg.Add(1)
-		C = &products.Product{
-			Name:    "consul",
-			Version: products.ConsulLatest,
-		}
-		if install {
-			go C.Download(false, true, wg)
-		} else {
-			go C.Download(false, false, wg)
-		}
-	} else if cv == "none" {
-		wg.Add(1)
-		C = &products.Product{}
-		go C.Download(true, false, wg)
-	} else {
-		wg.Add(1)
-		C = &products.Product{
-			Name:    "consul",
-			Version: products.SemVer(cv),
-		}
-		if install {
-			go C.Download(false, true, wg)
-		} else {
-			go C.Download(false, false, wg)
-		}
-	}
-
-	if vauv == "latest" {
-		wg.Add(1)
-		VAU = &products.Product{
-			Name:    "vault",
-			Version: products.VaultLatest,
-		}
-		if install {
-			go VAU.Download(false, true, wg)
-		} else {
-			go VAU.Download(false, false, wg)
-		}
-	} else if vauv == "none" {
-		wg.Add(1)
-		VAU = &products.Product{}
-		go VAU.Download(true, false, wg)
-	} else {
-		wg.Add(1)
-		VAU = &products.Product{
-			Name:    "vault",
-			Version: products.SemVer(vauv),
-		}
-		if install {
-			go VAU.Download(false, true, wg)
-		} else {
-			go VAU.Download(false, false, wg)
-		}
-	}
-	wg.Wait()
 }
