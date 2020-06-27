@@ -4,20 +4,24 @@ package products
 
 import (
 	"archive/zip"
+	"fmt"
 	"io"
+	"log"
 	"os"
 	"path/filepath"
 )
 
-func (P *Product) unzip() error {
-	dest := "C:\\Program Files\\hashicorp"
+func (P *Product) Install() {
+	dest := fmt.Sprintf("C:\\Program Files\\hashicorp")
 	r, err := zip.OpenReader(P.downloadedPath)
 	if err != nil {
-		return err
+		log.Println(err)
+		return
 	}
 	defer func() {
 		if err := r.Close(); err != nil {
-			panic(err)
+			log.Println(err)
+			return
 		}
 	}()
 
@@ -62,11 +66,10 @@ func (P *Product) unzip() error {
 	for _, f := range r.File {
 		err := extractAndWriteFile(f)
 		if err != nil {
-			return err
+			log.Println(err)
+			return
 		}
 	}
 
-	return nil
+	return
 }
-
-func (P *Product) Install() {}
