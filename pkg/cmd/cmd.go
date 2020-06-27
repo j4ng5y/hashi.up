@@ -36,7 +36,7 @@ func Run() {
 
 		mainCmd = &cobra.Command{
 			Use:     "hashi.up",
-			Version: "0.2.0",
+			Version: "0.2.1",
 			Args:    cobra.NoArgs,
 			Run: func(ccmd *cobra.Command, args []string) {
 				ccmd.Help()

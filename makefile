@@ -1,4 +1,4 @@
-VER = 0.2.0
+VER = 0.2.1
 SRC = cmd/hashi.up/hashi.up.go
 
 all: test build
