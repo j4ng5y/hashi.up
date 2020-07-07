@@ -329,11 +329,11 @@ func Run() {
 	updateCommand.Flags().Lookup("vault").NoOptDefVal = products.VaultLatest
 
 	uninstallCommand.Flags().BoolVar(&uninstallConsul, "consul", false, "uninstall consul")
-	uninstallCommand.Flags().BoolVar(&uninstallNomad, "nomad", false, "uninstall consul")
-	uninstallCommand.Flags().BoolVar(&uninstallPacker, "packer", false, "uninstall consul")
-	uninstallCommand.Flags().BoolVar(&uninstallTerraform, "terraform", false, "uninstall consul")
-	uninstallCommand.Flags().BoolVar(&uninstallVagrant, "vagrant", false, "uninstall consul")
-	uninstallCommand.Flags().BoolVar(&uninstallVault, "vault", false, "uninstall consul")
+	uninstallCommand.Flags().BoolVar(&uninstallNomad, "nomad", false, "uninstall nomad")
+	uninstallCommand.Flags().BoolVar(&uninstallPacker, "packer", false, "uninstall packer")
+	uninstallCommand.Flags().BoolVar(&uninstallTerraform, "terraform", false, "uninstall terraform")
+	uninstallCommand.Flags().BoolVar(&uninstallVagrant, "vagrant", false, "uninstall vagrant")
+	uninstallCommand.Flags().BoolVar(&uninstallVault, "vault", false, "uninstall vault")
 
 	if err := hashiupCommand.Execute(); err != nil {
 		log.Fatal(err)
