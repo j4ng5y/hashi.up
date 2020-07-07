@@ -8,11 +8,6 @@ import (
 )
 
 func (P *Product) Uninstall() {
-	if err != nil {
-		fmt.Printf("could not determine user directory, err: %+v\n", err)
-		return
-	}
-
 	p := fmt.Sprintf("C:\\Program Files\\hashicorp\\%s", string(P.Name))
 
 	if err := os.Remove(p); err != nil {
