@@ -1,5 +1,4 @@
 # Hashi.UP
----
 
 This is a little tool to help grab the hashicorp tools more easily, rather than having to go to each web page, find your OS/Arch, and download the tool.
 
