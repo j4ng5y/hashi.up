@@ -3,6 +3,12 @@
 
 This is a little tool to help grab the hashicorp tools more easily, rather than having to go to each web page, find your OS/Arch, and download the tool.
 
+## Getting the tool
+
+Head on over to the [Releases](https://github.com/j4ng5y/hashi.up/releases) page and grab the version you need for your os. This is a simple binary, so no real installation is necessary.
+
+On a *nix system, you may need to provide execution privliedges to run this tool: `chmod +x hashi.up`
+
 ## Usage
 
 ```A hashicorp tool downloader/installer/updater/uninstaller.
