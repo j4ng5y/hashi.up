@@ -22,7 +22,7 @@ func Run() {
 			Args:    cobra.NoArgs,
 			Short:   "A hashicorp tool downloader/installer/updater/uninstaller.",
 			Run:     func(ccmd *cobra.Command, args []string) {},
-			Version: "0.4.0",
+			Version: "0.4.1",
 		}
 		installCommand = &cobra.Command{
 			Use:   "install",
@@ -250,7 +250,52 @@ func Run() {
 			Use:   "remove",
 			Args:  cobra.NoArgs,
 			Short: "Remove one, some, or all of the hashicorp tools",
-			Run:   func(ccmd *cobra.Command, args []string) {},
+			Run: func(ccmd *cobra.Command, args []string) {
+				CONSUL, err := products.New("consul", products.SemVer("0.0.0"))
+				NOMAD, err := products.New("nomad", products.SemVer("0.0.0"))
+				PACKER, err := products.New("packer", products.SemVer("0.0.0"))
+				TERRAFORM, err := products.New("terraform", products.SemVer("0.0.0"))
+				VAGRANT, err := products.New("vagrant", products.SemVer("0.0.0"))
+				VAULT, err := products.New("vault", products.SemVer("0.0.0"))
+
+				if err != nil {
+					log.Fatal(err)
+				}
+
+				if !uninstallConsul && !uninstallNomad && !uninstallPacker && !uninstallTerraform && !uninstallVagrant && !uninstallVault {
+					CONSUL.Uninstall()
+					NOMAD.Uninstall()
+					PACKER.Uninstall()
+					TERRAFORM.Uninstall()
+					VAGRANT.Uninstall()
+					VAULT.Uninstall()
+					log.Printf("uninstalled all tools")
+				}
+				if uninstallConsul {
+					CONSUL.Uninstall()
+					log.Printf("uninstalled consul")
+				}
+				if uninstallNomad {
+					NOMAD.Uninstall()
+					log.Printf("uninstalled nomad")
+				}
+				if uninstallPacker {
+					PACKER.Uninstall()
+					log.Printf("uninstalled packer")
+				}
+				if uninstallTerraform {
+					TERRAFORM.Uninstall()
+					log.Printf("uninstalled terraform")
+				}
+				if uninstallVagrant {
+					VAGRANT.Uninstall()
+					log.Printf("uninstalled vagrant")
+				}
+				if uninstallVault {
+					VAULT.Uninstall()
+					log.Printf("uninstalled vault")
+				}
+			},
 		}
 	)
 
