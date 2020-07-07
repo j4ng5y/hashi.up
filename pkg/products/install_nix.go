@@ -38,7 +38,6 @@ export PATH=$PATH:%s/.local/hashicorp
 
 		b, err := ioutil.ReadAll(f)
 		if strings.Contains(string(b), "# hashi.up") {
-			fmt.Printf("PATH is already set, skipping setting PATH\n")
 			return nil
 		} else {
 			fmt.Printf("PATH is unset, setting PATH\n")
@@ -55,7 +54,6 @@ export PATH=$PATH:%s/.local/hashicorp
 
 		b, err := ioutil.ReadAll(f)
 		if strings.Contains(string(b), "# hashi.up") {
-			fmt.Printf("PATH is already set, skipping setting PATH\n")
 			return nil
 		} else {
 			fmt.Printf("PATH is unset, setting PATH\n")
@@ -72,7 +70,6 @@ export PATH=$PATH:%s/.local/hashicorp
 
 		b, err := ioutil.ReadAll(f)
 		if strings.Contains(string(b), "# hashi.up") {
-			fmt.Printf("PATH is already set, skipping setting PATH\n")
 			return nil
 		} else {
 			fmt.Printf("PATH is unset, setting PATH\n")
@@ -89,7 +86,6 @@ export PATH=$PATH:%s/.local/hashicorp
 
 		b, err := ioutil.ReadAll(f)
 		if strings.Contains(string(b), "# hashi.up") {
-			fmt.Printf("PATH is already set, skipping setting PATH\n")
 			return nil
 		} else {
 			fmt.Printf("PATH is unset, setting PATH\n")
@@ -106,7 +102,6 @@ export PATH=$PATH:%s/.local/hashicorp
 
 		b, err := ioutil.ReadAll(f)
 		if strings.Contains(string(b), "# hashi.up") {
-			fmt.Printf("PATH is already set, skipping setting PATH\n")
 			return nil
 		} else {
 			fmt.Printf("PATH is unset, setting PATH\n")
@@ -123,7 +118,6 @@ export PATH=$PATH:%s/.local/hashicorp
 
 		b, err := ioutil.ReadAll(f)
 		if strings.Contains(string(b), "# hashi.up") {
-			fmt.Printf("PATH is already set, skipping setting PATH\n")
 			return nil
 		} else {
 			fmt.Printf("PATH is unset, setting PATH\n")
@@ -140,7 +134,6 @@ export PATH=$PATH:%s/.local/hashicorp
 
 		b, err := ioutil.ReadAll(f)
 		if strings.Contains(string(b), "# hashi.up") {
-			fmt.Printf("PATH is already set, skipping setting PATH\n")
 			return nil
 		} else {
 			fmt.Printf("PATH is unset, setting PATH\n")
@@ -157,7 +150,6 @@ export PATH=$PATH:%s/.local/hashicorp
 
 		b, err := ioutil.ReadAll(f)
 		if strings.Contains(string(b), "# hashi.up") {
-			fmt.Printf("PATH is already set, skipping setting PATH\n")
 			return nil
 		} else {
 			fmt.Printf("PATH is unset, setting PATH\n")
@@ -174,7 +166,6 @@ export PATH=$PATH:%s/.local/hashicorp
 
 		b, err := ioutil.ReadAll(f)
 		if strings.Contains(string(b), "# hashi.up") {
-			fmt.Printf("PATH is already set, skipping setting PATH\n")
 			return nil
 		} else {
 			fmt.Printf("PATH is unset, setting PATH\n")
@@ -191,7 +182,6 @@ export PATH=$PATH:%s/.local/hashicorp
 
 		b, err := ioutil.ReadAll(f)
 		if strings.Contains(string(b), "# hashi.up") {
-			fmt.Printf("PATH is already set, skipping setting PATH\n")
 			return nil
 		} else {
 			fmt.Printf("PATH is unset, setting PATH\n")
@@ -208,7 +198,6 @@ export PATH=$PATH:%s/.local/hashicorp
 
 		b, err := ioutil.ReadAll(f)
 		if strings.Contains(string(b), "# hashi.up") {
-			fmt.Printf("PATH is already set, skipping setting PATH\n")
 			return nil
 		} else {
 			fmt.Printf("PATH is unset, setting PATH\n")
@@ -225,7 +214,6 @@ export PATH=$PATH:%s/.local/hashicorp
 
 		b, err := ioutil.ReadAll(f)
 		if strings.Contains(string(b), "# hashi.up") {
-			fmt.Printf("PATH is already set, skipping setting PATH\n")
 			return nil
 		} else {
 			fmt.Printf("PATH is unset, setting PATH\n")
@@ -242,7 +230,6 @@ export PATH=$PATH:%s/.local/hashicorp
 
 		b, err := ioutil.ReadAll(f)
 		if strings.Contains(string(b), "# hashi.up") {
-			fmt.Printf("PATH is already set, skipping setting PATH\n")
 			return nil
 		} else {
 			fmt.Printf("PATH is unset, setting PATH\n")
@@ -259,7 +246,6 @@ export PATH=$PATH:%s/.local/hashicorp
 
 		b, err := ioutil.ReadAll(f)
 		if strings.Contains(string(b), "# hashi.up") {
-			fmt.Printf("PATH is already set, skipping setting PATH\n")
 			return nil
 		} else {
 			fmt.Printf("PATH is unset, setting PATH\n")
@@ -271,11 +257,7 @@ export PATH=$PATH:%s/.local/hashicorp
 	return nil
 }
 
-func (P *Product) Install(tool string) {
-
-}
-
-func (P *Product) InstallAll() {
+func (P *Product) Install() {
 	h, err := os.UserHomeDir()
 	if err != nil {
 		log.Println(err)

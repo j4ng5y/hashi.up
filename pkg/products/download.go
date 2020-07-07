@@ -14,7 +14,6 @@ import (
 
 func (T *Product) Download(wg *sync.WaitGroup) {
 	defer wg.Done()
-	defer T.Install(string(T.Name))
 
 	goos := strings.ToLower(runtime.GOOS)
 	goarch := strings.ToLower(runtime.GOARCH)
@@ -99,14 +98,14 @@ func (T *Product) Download(wg *sync.WaitGroup) {
 				}
 				defer f.Close()
 
-				w, err := io.Copy(f, resp.Body)
+				_, err = io.Copy(f, resp.Body)
 				if err != nil {
 					log.Println(err)
 					return
 				}
 
 				T.downloadedPath = f.Name()
-				fmt.Printf("Successfully wrote %d bytes to %s\n", w, f.Name())
+				fmt.Printf("Successfully downloaded %s to %s\n", T.Name, f.Name())
 				return
 			}
 			log.Printf("%s is not a valid version\n", T.Version)
