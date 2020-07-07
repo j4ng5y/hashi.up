@@ -37,7 +37,7 @@ Flags:
 Use "hashi.up [command] --help" for more information about a command.
 ```
 
-### Installation
+### Hashicorp Tool Installation
 
 ```Install one, some, or all of the hashicorp tools
 
@@ -68,7 +68,7 @@ To install multiple, but not all tools at their latest version: `hashi.up instal
 
 To install multiple, but not all tools at a specific version: `hashi.up install --terraform=0.11.1 --packer=1.5.6 --vault=1.4.0`
 
-### Updating
+### Hashicorp Tool Updates
 
 ```Update one, some, or all of the hashicorp tools
 
@@ -76,13 +76,13 @@ Usage:
   hashi.up update [flags]
 
 Flags:
-      --consul string[="1.8.0"]        the consul version to update to, leave blank for latest (default "1.8.0")
+      --consul string[="1.8.0"]        the consul version to update to, leave blank for latest
   -h, --help                           help for update
-      --nomad string[="0.11.3"]        the nomad version to update to, leave blank for latest (default "0.11.3")
-      --packer string[="1.6.0"]        the packer version to update to, leave blank for latest (default "1.6.0")
-      --terraform string[="0.12.28"]   the terraform version to update to, leave blank for latest (default "0.12.28")
-      --vagrant string[="2.2.9"]       the vagrant version to update to, leave blank for latest (default "2.2.9")
-      --vault string[="1.4.2"]         the vault version to update to, leave blank for latest (default "1.4.2")        the vault version to install, leave blank for latest
+      --nomad string[="0.11.3"]        the nomad version to update to, leave blank for latest
+      --packer string[="1.6.0"]        the packer version to update to, leave blank for latest
+      --terraform string[="0.12.28"]   the terraform version to update to, leave blank for latest
+      --vagrant string[="2.2.9"]       the vagrant version to update to, leave blank for latest
+      --vault string[="1.4.2"]         the vault version to update to, leave blank for latest
 ```
 
 Example:
@@ -97,7 +97,7 @@ To update multiple, but not all tools at their latest version: `hashi.up update 
 
 To update multiple, but not all tools at a specific version: `hashi.up update --terraform=0.11.1 --packer=1.5.6 --vault=1.4.0`
 
-### Uninstalling
+### Uninstalling Hashicorp Tools
 
 ```Remove one, some, or all of the hashicorp tools
 
