@@ -40,10 +40,10 @@ export PATH=$PATH:%s/.local/hashicorp
 		if strings.Contains(string(b), "# hashi.up") {
 			return nil
 		} else {
-			fmt.Printf("PATH is unset, setting PATH\n")
 			if _, err := f.WriteString(fmt.Sprintf(p, h)); err != nil {
 				return err
 			}
+			log.Println("successfully updated path")
 		}
 	case "bash":
 		f, err := os.OpenFile(path.Join(h, fmt.Sprintf(".%src", sh)), os.O_RDWR|os.O_APPEND, 0644)
@@ -56,10 +56,10 @@ export PATH=$PATH:%s/.local/hashicorp
 		if strings.Contains(string(b), "# hashi.up") {
 			return nil
 		} else {
-			fmt.Printf("PATH is unset, setting PATH\n")
 			if _, err := f.WriteString(fmt.Sprintf(p, h)); err != nil {
 				return err
 			}
+			log.Println("successfully updated path")
 		}
 	case "csh":
 		f, err := os.OpenFile(path.Join(h, fmt.Sprintf(".%src", sh)), os.O_RDWR|os.O_APPEND, 0644)
@@ -72,10 +72,10 @@ export PATH=$PATH:%s/.local/hashicorp
 		if strings.Contains(string(b), "# hashi.up") {
 			return nil
 		} else {
-			fmt.Printf("PATH is unset, setting PATH\n")
 			if _, err := f.WriteString(fmt.Sprintf(p, h)); err != nil {
 				return err
 			}
+			log.Println("successfully updated path")
 		}
 	case "ksh":
 		f, err := os.OpenFile(path.Join(h, fmt.Sprintf(".%src", sh)), os.O_RDWR|os.O_APPEND, 0644)
@@ -88,10 +88,10 @@ export PATH=$PATH:%s/.local/hashicorp
 		if strings.Contains(string(b), "# hashi.up") {
 			return nil
 		} else {
-			fmt.Printf("PATH is unset, setting PATH\n")
 			if _, err := f.WriteString(fmt.Sprintf(p, h)); err != nil {
 				return err
 			}
+			log.Println("successfully updated path")
 		}
 	case "zsh":
 		f, err := os.OpenFile(path.Join(h, fmt.Sprintf(".%src", sh)), os.O_RDWR|os.O_APPEND, 0644)
@@ -104,10 +104,10 @@ export PATH=$PATH:%s/.local/hashicorp
 		if strings.Contains(string(b), "# hashi.up") {
 			return nil
 		} else {
-			fmt.Printf("PATH is unset, setting PATH\n")
 			if _, err := f.WriteString(fmt.Sprintf(p, h)); err != nil {
 				return err
 			}
+			log.Println("successfully updated path")
 		}
 	case "tcsh":
 		f, err := os.OpenFile(path.Join(h, fmt.Sprintf(".%src", sh)), os.O_RDWR|os.O_APPEND, 0644)
@@ -120,10 +120,10 @@ export PATH=$PATH:%s/.local/hashicorp
 		if strings.Contains(string(b), "# hashi.up") {
 			return nil
 		} else {
-			fmt.Printf("PATH is unset, setting PATH\n")
 			if _, err := f.WriteString(fmt.Sprintf(p, h)); err != nil {
 				return err
 			}
+			log.Println("successfully updated path")
 		}
 	case "fish":
 		f, err := os.OpenFile(path.Join(h, fmt.Sprintf(".%src", sh)), os.O_RDWR|os.O_APPEND, 0644)
@@ -136,10 +136,10 @@ export PATH=$PATH:%s/.local/hashicorp
 		if strings.Contains(string(b), "# hashi.up") {
 			return nil
 		} else {
-			fmt.Printf("PATH is unset, setting PATH\n")
 			if _, err := f.WriteString(fmt.Sprintf(p, h)); err != nil {
 				return err
 			}
+			log.Println("successfully updated path")
 		}
 	case "ion":
 		f, err := os.OpenFile(path.Join(h, fmt.Sprintf(".%src", sh)), os.O_RDWR|os.O_APPEND, 0644)
@@ -152,10 +152,10 @@ export PATH=$PATH:%s/.local/hashicorp
 		if strings.Contains(string(b), "# hashi.up") {
 			return nil
 		} else {
-			fmt.Printf("PATH is unset, setting PATH\n")
 			if _, err := f.WriteString(fmt.Sprintf(p, h)); err != nil {
 				return err
 			}
+			log.Println("successfully updated path")
 		}
 	case "dash":
 		f, err := os.OpenFile(path.Join(h, fmt.Sprintf(".%src", sh)), os.O_RDWR|os.O_APPEND, 0644)
@@ -168,10 +168,10 @@ export PATH=$PATH:%s/.local/hashicorp
 		if strings.Contains(string(b), "# hashi.up") {
 			return nil
 		} else {
-			fmt.Printf("PATH is unset, setting PATH\n")
 			if _, err := f.WriteString(fmt.Sprintf(p, h)); err != nil {
 				return err
 			}
+			log.Println("successfully updated path")
 		}
 	case "eshell":
 		f, err := os.OpenFile(path.Join(h, fmt.Sprintf(".%src", sh)), os.O_RDWR|os.O_APPEND, 0644)
@@ -184,10 +184,10 @@ export PATH=$PATH:%s/.local/hashicorp
 		if strings.Contains(string(b), "# hashi.up") {
 			return nil
 		} else {
-			fmt.Printf("PATH is unset, setting PATH\n")
 			if _, err := f.WriteString(fmt.Sprintf(p, h)); err != nil {
 				return err
 			}
+			log.Println("successfully updated path")
 		}
 	case "rc":
 		f, err := os.OpenFile(path.Join(h, fmt.Sprintf(".%src", sh)), os.O_RDWR|os.O_APPEND, 0644)
@@ -200,10 +200,10 @@ export PATH=$PATH:%s/.local/hashicorp
 		if strings.Contains(string(b), "# hashi.up") {
 			return nil
 		} else {
-			fmt.Printf("PATH is unset, setting PATH\n")
 			if _, err := f.WriteString(fmt.Sprintf(p, h)); err != nil {
 				return err
 			}
+			log.Println("successfully updated path")
 		}
 	case "scsh":
 		f, err := os.OpenFile(path.Join(h, fmt.Sprintf(".%src", sh)), os.O_RDWR|os.O_APPEND, 0644)
@@ -216,10 +216,10 @@ export PATH=$PATH:%s/.local/hashicorp
 		if strings.Contains(string(b), "# hashi.up") {
 			return nil
 		} else {
-			fmt.Printf("PATH is unset, setting PATH\n")
 			if _, err := f.WriteString(fmt.Sprintf(p, h)); err != nil {
 				return err
 			}
+			log.Println("successfully updated path")
 		}
 	case "xonsh":
 		f, err := os.OpenFile(path.Join(h, fmt.Sprintf(".%src", sh)), os.O_RDWR|os.O_APPEND, 0644)
@@ -232,10 +232,10 @@ export PATH=$PATH:%s/.local/hashicorp
 		if strings.Contains(string(b), "# hashi.up") {
 			return nil
 		} else {
-			fmt.Printf("PATH is unset, setting PATH\n")
 			if _, err := f.WriteString(fmt.Sprintf(p, h)); err != nil {
 				return err
 			}
+			log.Println("successfully updated path")
 		}
 	case "oh":
 		f, err := os.OpenFile(path.Join(h, fmt.Sprintf(".%src", sh)), os.O_RDWR|os.O_APPEND, 0644)
@@ -248,10 +248,10 @@ export PATH=$PATH:%s/.local/hashicorp
 		if strings.Contains(string(b), "# hashi.up") {
 			return nil
 		} else {
-			fmt.Printf("PATH is unset, setting PATH\n")
 			if _, err := f.WriteString(fmt.Sprintf(p, h)); err != nil {
 				return err
 			}
+			log.Println("successfully updated path")
 		}
 	}
 	return nil
@@ -321,6 +321,7 @@ func (P *Product) Install() {
 			log.Println(err)
 			return
 		}
+		log.Printf("successful installed %s in %s", P.Name, dest)
 	}
 
 	if err := P.setPath(); err != nil {

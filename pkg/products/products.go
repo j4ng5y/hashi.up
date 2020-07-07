@@ -16,13 +16,6 @@ const (
 	// 4) Tool OS
 	// 5) Tool arch
 	BaseURL = `https://releases.hashicorp.com/%s/%d.%d.%d/%s_%d.%d.%d_%s_%s.zip`
-
-	TerraformLatest = "0.12.28"
-	VaultLatest     = "1.4.2"
-	ConsulLatest    = "1.8.0"
-	NomadLatest     = "0.11.3"
-	VagrantLatest   = "2.2.9"
-	PackerLatest    = "1.6.0"
 )
 
 type SemVer string

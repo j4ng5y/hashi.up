@@ -12,6 +12,7 @@ import (
 // Run runs the CLI
 func Run() {
 	var (
+		ConsulLatest, NomadLatest, PackerLatest, TerraformLatest, VagrantLatest, VaultLatest                                                 string
 		downloadOnly, allTools                                                                                                               bool
 		consulInstallVersion, nomadInstallVersion, packerInstallVersion, terraformInstallVersion, vagrantInstallVersion, vaultInstallVersion string
 		consulUpdatedVersion, nomadUpdatedVersion, packerUpdatedVersion, terraformUpdatedVersion, vagrantUpdatedVersion, vaultUpdatedVersion string
@@ -22,7 +23,7 @@ func Run() {
 			Args:    cobra.NoArgs,
 			Short:   "A hashicorp tool downloader/installer/updater/uninstaller.",
 			Run:     func(ccmd *cobra.Command, args []string) {},
-			Version: "0.4.1",
+			Version: "0.4.2",
 		}
 		installCommand = &cobra.Command{
 			Use:   "install",
@@ -47,12 +48,12 @@ func Run() {
 				}
 
 				if allTools {
-					CONSUL, err = products.New("consul", products.SemVer(products.ConsulLatest))
-					NOMAD, err = products.New("nomad", products.SemVer(products.NomadLatest))
-					PACKER, err = products.New("packer", products.SemVer(products.PackerLatest))
-					TERRAFORM, err = products.New("terraform", products.SemVer(products.TerraformLatest))
-					VAGRANT, err = products.New("vagrant", products.SemVer(products.VagrantLatest))
-					VAULT, err = products.New("vault", products.SemVer(products.VaultLatest))
+					CONSUL, err = products.New("consul", products.SemVer(ConsulLatest))
+					NOMAD, err = products.New("nomad", products.SemVer(NomadLatest))
+					PACKER, err = products.New("packer", products.SemVer(PackerLatest))
+					TERRAFORM, err = products.New("terraform", products.SemVer(TerraformLatest))
+					VAGRANT, err = products.New("vagrant", products.SemVer(VagrantLatest))
+					VAULT, err = products.New("vault", products.SemVer(VaultLatest))
 
 					if err != nil {
 						log.Fatal(err)
@@ -158,12 +159,12 @@ func Run() {
 				}
 
 				if allTools {
-					CONSUL, err = products.New("consul", products.SemVer(products.ConsulLatest))
-					NOMAD, err = products.New("nomad", products.SemVer(products.NomadLatest))
-					PACKER, err = products.New("packer", products.SemVer(products.PackerLatest))
-					TERRAFORM, err = products.New("terraform", products.SemVer(products.TerraformLatest))
-					VAGRANT, err = products.New("vagrant", products.SemVer(products.VagrantLatest))
-					VAULT, err = products.New("vault", products.SemVer(products.VaultLatest))
+					CONSUL, err = products.New("consul", products.SemVer(ConsulLatest))
+					NOMAD, err = products.New("nomad", products.SemVer(NomadLatest))
+					PACKER, err = products.New("packer", products.SemVer(PackerLatest))
+					TERRAFORM, err = products.New("terraform", products.SemVer(TerraformLatest))
+					VAGRANT, err = products.New("vagrant", products.SemVer(VagrantLatest))
+					VAULT, err = products.New("vault", products.SemVer(VaultLatest))
 
 					if err != nil {
 						log.Fatal(err)
@@ -299,6 +300,13 @@ func Run() {
 		}
 	)
 
+	ConsulLatest = products.GetLatest("consul")
+	NomadLatest = products.GetLatest("nomad")
+	PackerLatest = products.GetLatest("packer")
+	TerraformLatest = products.GetLatest("terraform")
+	VagrantLatest = products.GetLatest("vagrant")
+	VaultLatest = products.GetLatest("vault")
+
 	hashiupCommand.AddCommand(installCommand, updateCommand, uninstallCommand)
 	installCommand.Flags().BoolVar(&allTools, "all", false, "download or install all available hashicorp tools at their latest version")
 	installCommand.Flags().BoolVar(&downloadOnly, "download-only", false, "only download the hashicorp tools, but don't install them")
@@ -308,25 +316,25 @@ func Run() {
 	installCommand.Flags().StringVar(&terraformInstallVersion, "terraform", "", "the terraform version to install, leave blank for latest")
 	installCommand.Flags().StringVar(&vagrantInstallVersion, "vagrant", "", "the vagrant version to install, leave blank for latest")
 	installCommand.Flags().StringVar(&vaultInstallVersion, "vault", "", "the vault version to install, leave blank for latest")
-	installCommand.Flags().Lookup("consul").NoOptDefVal = products.ConsulLatest
-	installCommand.Flags().Lookup("nomad").NoOptDefVal = products.NomadLatest
-	installCommand.Flags().Lookup("packer").NoOptDefVal = products.PackerLatest
-	installCommand.Flags().Lookup("terraform").NoOptDefVal = products.TerraformLatest
-	installCommand.Flags().Lookup("vagrant").NoOptDefVal = products.VagrantLatest
-	installCommand.Flags().Lookup("vault").NoOptDefVal = products.VaultLatest
+	installCommand.Flags().Lookup("consul").NoOptDefVal = ConsulLatest
+	installCommand.Flags().Lookup("nomad").NoOptDefVal = NomadLatest
+	installCommand.Flags().Lookup("packer").NoOptDefVal = PackerLatest
+	installCommand.Flags().Lookup("terraform").NoOptDefVal = TerraformLatest
+	installCommand.Flags().Lookup("vagrant").NoOptDefVal = VagrantLatest
+	installCommand.Flags().Lookup("vault").NoOptDefVal = VaultLatest
 
-	updateCommand.Flags().StringVar(&consulUpdatedVersion, "consul", products.ConsulLatest, "the consul version to update to, leave blank for latest")
-	updateCommand.Flags().StringVar(&nomadUpdatedVersion, "nomad", products.NomadLatest, "the nomad version to update to, leave blank for latest")
-	updateCommand.Flags().StringVar(&packerUpdatedVersion, "packer", products.PackerLatest, "the packer version to update to, leave blank for latest")
-	updateCommand.Flags().StringVar(&terraformUpdatedVersion, "terraform", products.TerraformLatest, "the terraform version to update to, leave blank for latest")
-	updateCommand.Flags().StringVar(&vagrantUpdatedVersion, "vagrant", products.VagrantLatest, "the vagrant version to update to, leave blank for latest")
-	updateCommand.Flags().StringVar(&vaultUpdatedVersion, "vault", products.VaultLatest, "the vault version to update to, leave blank for latest")
-	updateCommand.Flags().Lookup("consul").NoOptDefVal = products.ConsulLatest
-	updateCommand.Flags().Lookup("nomad").NoOptDefVal = products.NomadLatest
-	updateCommand.Flags().Lookup("packer").NoOptDefVal = products.PackerLatest
-	updateCommand.Flags().Lookup("terraform").NoOptDefVal = products.TerraformLatest
-	updateCommand.Flags().Lookup("vagrant").NoOptDefVal = products.VagrantLatest
-	updateCommand.Flags().Lookup("vault").NoOptDefVal = products.VaultLatest
+	updateCommand.Flags().StringVar(&consulUpdatedVersion, "consul", "", "the consul version to update to, leave blank for latest")
+	updateCommand.Flags().StringVar(&nomadUpdatedVersion, "nomad", "", "the nomad version to update to, leave blank for latest")
+	updateCommand.Flags().StringVar(&packerUpdatedVersion, "packer", "", "the packer version to update to, leave blank for latest")
+	updateCommand.Flags().StringVar(&terraformUpdatedVersion, "terraform", "", "the terraform version to update to, leave blank for latest")
+	updateCommand.Flags().StringVar(&vagrantUpdatedVersion, "vagrant", "", "the vagrant version to update to, leave blank for latest")
+	updateCommand.Flags().StringVar(&vaultUpdatedVersion, "vault", "", "the vault version to update to, leave blank for latest")
+	updateCommand.Flags().Lookup("consul").NoOptDefVal = ConsulLatest
+	updateCommand.Flags().Lookup("nomad").NoOptDefVal = NomadLatest
+	updateCommand.Flags().Lookup("packer").NoOptDefVal = PackerLatest
+	updateCommand.Flags().Lookup("terraform").NoOptDefVal = TerraformLatest
+	updateCommand.Flags().Lookup("vagrant").NoOptDefVal = VagrantLatest
+	updateCommand.Flags().Lookup("vault").NoOptDefVal = VaultLatest
 
 	uninstallCommand.Flags().BoolVar(&uninstallConsul, "consul", false, "uninstall consul")
 	uninstallCommand.Flags().BoolVar(&uninstallNomad, "nomad", false, "uninstall nomad")

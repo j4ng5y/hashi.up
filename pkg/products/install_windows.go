@@ -69,6 +69,7 @@ func (P *Product) Install() {
 			log.Println(err)
 			return
 		}
+		log.Printf("successful installed %s in %s", P.Name, dest)
 	}
 
 	return
