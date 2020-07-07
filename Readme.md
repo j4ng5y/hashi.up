@@ -8,6 +8,14 @@ Head on over to the [Releases](https://github.com/j4ng5y/hashi.up/releases) page
 
 On a *nix system, you may need to provide execution privliedges to run this tool: `chmod +x hashi.up`
 
+## Building from source
+
+You would need to have Go installed and runable, to do this, head over to [The Go Downloads Website](https://golang.org/dl) and install it.
+
+Additionally, you would need to have `make` installed.
+
+Otherwise, simply clone this repository, `cd` into the repository direcotry, and run `make && make install`.
+
 ## Usage
 
 ```A hashicorp tool downloader/installer/updater/uninstaller.
