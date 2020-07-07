@@ -8,7 +8,6 @@ import (
 )
 
 func (P *Product) Uninstall() {
-	h, err := os.UserHomeDir()
 	if err != nil {
 		fmt.Printf("could not determine user directory, err: %+v\n", err)
 		return
