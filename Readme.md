@@ -124,8 +124,8 @@ To remove multiple tools, but not all of them: `hashi.up remove --terraform --pa
 
 ## TODO
 
-* Need to make the latest tool gathering more automatic (rather than a hard-coded version number), it's totally possible, I just haven't gotten around to it yet.
-* Whatever else y'all find
+* More code cleanup
+* Whatever y'all find
 
 ## Contributing
 
