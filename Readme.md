@@ -123,6 +123,7 @@ To remove multiple tools, but not all of them: `hashi.up remove --terraform --pa
 
 ## TODO
 
+* Make the update not do anything if no update is needed
 * More code cleanup
 * Whatever y'all find
 
