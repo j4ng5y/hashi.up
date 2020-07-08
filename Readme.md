@@ -45,7 +45,6 @@ Usage:
   hashi.up install [flags]
 
 Flags:
-      --all                            download or install all available hashicorp tools at their latest version
       --consul string[="1.8.0"]        download/install consul at a specific version
       --download-only                  only download the hashicorp tools, but don't install them
   -h, --help                           help for install
