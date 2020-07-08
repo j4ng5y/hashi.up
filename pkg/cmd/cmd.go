@@ -23,7 +23,7 @@ func Run() {
 			Args:    cobra.NoArgs,
 			Short:   "A hashicorp tool downloader/installer/updater/uninstaller.",
 			Run:     func(ccmd *cobra.Command, args []string) {},
-			Version: "0.4.2",
+			Version: "0.4.3",
 		}
 		installCommand = &cobra.Command{
 			Use:   "install",
@@ -45,6 +45,10 @@ func Run() {
 
 				if err != nil {
 					log.Fatal(err)
+				}
+
+				if consulInstallVersion == "" && nomadInstallVersion == "" && packerInstallVersion == "" && terraformInstallVersion == "" && vagrantInstallVersion == "" && vaultInstallVersion == "" {
+					allTools = true
 				}
 
 				if allTools {
@@ -156,6 +160,10 @@ func Run() {
 
 				if err != nil {
 					log.Fatal(err)
+				}
+
+				if consulUpdatedVersion == "" && nomadUpdatedVersion == "" && packerUpdatedVersion == "" && terraformUpdatedVersion == "" && vagrantUpdatedVersion == "" && vaultUpdatedVersion == "" {
+					allTools = true
 				}
 
 				if allTools {
@@ -308,7 +316,6 @@ func Run() {
 	VaultLatest = products.GetLatest("vault")
 
 	hashiupCommand.AddCommand(installCommand, updateCommand, uninstallCommand)
-	installCommand.Flags().BoolVar(&allTools, "all", false, "download or install all available hashicorp tools at their latest version")
 	installCommand.Flags().BoolVar(&downloadOnly, "download-only", false, "only download the hashicorp tools, but don't install them")
 	installCommand.Flags().StringVar(&consulInstallVersion, "consul", "", "download/install consul at a specific version")
 	installCommand.Flags().StringVar(&nomadInstallVersion, "nomad", "", "the nomad version to install, leave blank for latest")
