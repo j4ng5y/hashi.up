@@ -55,18 +55,53 @@ func (T *Product) Download(wg *sync.WaitGroup) {
 
 	if T.Version != "" {
 		if T.Version.Valid() {
-			T.downloadURL = fmt.Sprintf(
-				BaseURL,
-				name,
-				T.Version.Major(),
-				T.Version.Minor(),
-				T.Version.Patch(),
-				name,
-				T.Version.Major(),
-				T.Version.Minor(),
-				T.Version.Patch(),
-				goos,
-				goarch)
+			switch goos {
+			case "windows":
+				switch goarch {
+				case "amd64":
+					T.downloadURL = fmt.Sprintf(
+						BaseURL,
+						name,
+						T.Version.Major(),
+						T.Version.Minor(),
+						T.Version.Patch(),
+						name,
+						T.Version.Major(),
+						T.Version.Minor(),
+						T.Version.Patch(),
+						"x86",
+						"64")
+				case "386":
+					T.downloadURL = strings.TrimSuffix(fmt.Sprintf(
+						BaseURL,
+						name,
+						T.Version.Major(),
+						T.Version.Minor(),
+						T.Version.Patch(),
+						name,
+						T.Version.Major(),
+						T.Version.Minor(),
+						T.Version.Patch(),
+						"i686"), "_")
+				default:
+					log.Println("unsupported OS Architecture")
+					return
+				}
+			default:
+				T.downloadURL = fmt.Sprintf(
+					BaseURL,
+					name,
+					T.Version.Major(),
+					T.Version.Minor(),
+					T.Version.Patch(),
+					name,
+					T.Version.Major(),
+					T.Version.Minor(),
+					T.Version.Patch(),
+					goos,
+					goarch)
+			}
+
 			resp, err := http.Get(T.downloadURL)
 			if err != nil {
 				log.Println(err)
