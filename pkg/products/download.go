@@ -55,12 +55,12 @@ func (T *Product) Download(wg *sync.WaitGroup) {
 
 	if T.Version != "" {
 		if T.Version.Valid() {
-			switch goos {
-			case "windows":
+			switch {
+			case goos == "windows" && T.Name == "vagrant":
 				switch goarch {
 				case "amd64":
 					T.downloadURL = fmt.Sprintf(
-						BaseURL,
+						`https://releases.hashicorp.com/%s/%d.%d.%d/%s_%d.%d.%d_%s_%s.msi`,
 						name,
 						T.Version.Major(),
 						T.Version.Minor(),
@@ -72,8 +72,8 @@ func (T *Product) Download(wg *sync.WaitGroup) {
 						"x86",
 						"64")
 				case "386":
-					T.downloadURL = strings.TrimSuffix(fmt.Sprintf(
-						BaseURL,
+					T.downloadURL = fmt.Sprintf(
+						`https://releases.hashicorp.com/%s/%d.%d.%d/%s_%d.%d.%d_%s.msi`,
 						name,
 						T.Version.Major(),
 						T.Version.Minor(),
@@ -82,10 +82,7 @@ func (T *Product) Download(wg *sync.WaitGroup) {
 						T.Version.Major(),
 						T.Version.Minor(),
 						T.Version.Patch(),
-						"i686"), "_")
-				default:
-					log.Println("unsupported OS Architecture")
-					return
+						"i686")
 				}
 			default:
 				T.downloadURL = fmt.Sprintf(
