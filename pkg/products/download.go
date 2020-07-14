@@ -110,7 +110,15 @@ func (T *Product) Download(wg *sync.WaitGroup) {
 			}
 			defer resp.Body.Close()
 
-			f, err := os.OpenFile(path.Join(os.TempDir(), fmt.Sprintf("%s.zip", name)), os.O_CREATE|os.O_WRONLY, 0770)
+			var fname string
+			switch {
+			case goos == "windows" && T.Name == "vagrant":
+				fname = "vagrant.msi"
+			default:
+				fname = fmt.Sprintf("%s.zip", name)
+			}
+
+			f, err := os.OpenFile(path.Join(os.TempDir(), fname), os.O_CREATE|os.O_WRONLY, 0770)
 			if err != nil {
 				log.Println(err)
 				return
